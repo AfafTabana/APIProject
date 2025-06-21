@@ -37,10 +37,7 @@ namespace APIProject.Repository
 
         }
 
-        public void Save()
-        {
-            context.SaveChanges();
-        }
+       
 
     }
 }

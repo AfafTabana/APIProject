@@ -18,8 +18,8 @@ namespace APIProject.Models
 
         public int Grade { get; set; }
 
-        public List<Student_Exam> Results { get; set; }
+        public virtual List<Student_Exam> Results { get; set; }
 
-        public List<Question> Questions { get; set; }
+        public virtual List<Question> Questions { get; set; }
     }
 }

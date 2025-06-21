@@ -16,7 +16,7 @@ namespace APIProject.Repository
             return context.Set<TEntity>().ToList();
         }
 
-        public  TEntity GEtById(int id)
+        public  TEntity GetById(int id)
         {
             return context.Set<TEntity>().Find(id);
         }
@@ -33,14 +33,16 @@ namespace APIProject.Repository
 
         public void Remove(int id)
         {
-            TEntity entity = GEtById(id);
+            TEntity entity = GetById(id);
+            if (entity != null)
+            {
+                context.Set<TEntity>().Remove(entity);
+            }
+           
 
         }
 
-        public void Save()
-        {
-            context.SaveChanges();
-        }
+       
 
     }
 }

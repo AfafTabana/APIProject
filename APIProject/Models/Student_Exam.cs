@@ -15,9 +15,9 @@ namespace APIProject.Models
         public string Status { get; set; }
 
         [ForeignKey("Student_id")]
-        public Student Student { get; set; }
+        public virtual Student Student { get; set; }
 
         [ForeignKey("Exam_id")]
-        public Exam Exam { get; set; }
+        public virtual Exam Exam { get; set; }
     }
 }

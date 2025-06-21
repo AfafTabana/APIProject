@@ -9,9 +9,9 @@
 
         public string Username { get; set; }
 
-        public string Password { get; set; }
+       
 
-       public List<Student_Exam> Results { get; set; }
+       public virtual List<Student_Exam> Results { get; set; }
 
     }
 }

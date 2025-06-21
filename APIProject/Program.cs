@@ -1,5 +1,6 @@
 
 using APIProject.Models;
+using APIProject.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -11,6 +12,7 @@ namespace APIProject
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //Regestir connection string 
             builder.Services.AddDbContext<SystemMangmentContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("db")));
 
@@ -20,13 +22,24 @@ namespace APIProject
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            #region Register services Here 
+            //1=== register generic repository
+            builder.Services.AddScoped<GenericRepository<Student>>();
+
+            #endregion
+
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+
                 app.MapOpenApi();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(op => op.SwaggerEndpoint("/openapi/v1.json", "v1"));
+
             }
 
             app.UseHttpsRedirection();

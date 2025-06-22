@@ -1,8 +1,10 @@
 
+using APIProject.Mapper;
 using APIProject.Models;
 using APIProject.Repository;
 using APIProject.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace APIProject
@@ -15,7 +17,10 @@ namespace APIProject
 
             //Regestir connection string 
             builder.Services.AddDbContext<SystemMangmentContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("db")));
+            {
+                options.UseLazyLoadingProxies();
+                options.UseSqlServer(builder.Configuration.GetConnectionString("db"));
+            });
 
             // Add services to the container.
 
@@ -23,10 +28,10 @@ namespace APIProject
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+
             #region Register services Here 
             //1=== register generic repository
             builder.Services.AddScoped<GenericRepository<Student>>();
-            builder.Services.AddScoped<UnitofWork>();
 
             #endregion
 

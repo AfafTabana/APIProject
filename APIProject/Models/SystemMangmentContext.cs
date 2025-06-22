@@ -13,15 +13,15 @@ namespace APIProject.Models
        : base(options)
         {
         }
-        public DbSet<Student> Students { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
 
-        public DbSet<Exam> Exams { get; set; }
+        public virtual DbSet<Exam> Exams { get; set; }
 
-        public DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
 
-        public DbSet<Admin> Admins { get; set; }    
+        public virtual DbSet<Admin> Admins { get; set; }    
 
-        public DbSet<Student_Exam> Student_Exams { get; set; }
+        public virtual DbSet<Student_Exam> Student_Exams { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

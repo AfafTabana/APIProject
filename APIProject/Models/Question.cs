@@ -17,6 +17,6 @@ namespace APIProject.Models
         public string SWrong_Answer { get; set; }
 
         [ForeignKey("Exam_id")]
-        public Exam Exam { get; set; }
+        public virtual Exam Exam { get; set; }
     }
 }

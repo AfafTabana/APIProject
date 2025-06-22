@@ -1,7 +1,7 @@
 ﻿using APIProject.Models;
 using APIProject.Repository;
 
-namespace APIProject.UnitOfWork
+namespace APIProject.UnitofWork
 {
     public class UnitofWork
     {

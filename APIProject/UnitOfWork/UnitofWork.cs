@@ -1,26 +1,20 @@
 ﻿using APIProject.Models;
 using APIProject.Repository;
 
-namespace APIProject.UnitOfWork
+namespace APIProject.UnitofWork
 {
-    public class UnitofWork
+    public class UnitOfWork
     {
-        private readonly SystemMangmentContext context;
-
+        public readonly SystemMangmentContext _db;
         private GenericRepository<Student> _studentrepo;
-        private GenericRepository<Admin> _adminRepo;
-        private GenericRepository<Question> _questionRepo;
-        private GenericRepository<Exam> _examRepo;
-        private GenericRepository<Student_Exam> _studentExamRepo;
-        public UnitofWork(SystemMangmentContext _context)
+        public UnitOfWork( SystemMangmentContext db)
         {
-            this.context = _context;
+            this._db = db;
         }
 
         public GenericRepository<Student> StudentRepo
         {
-            
-           get
+            get
             {
                 if (_studentrepo == null)
                 {
@@ -30,48 +24,9 @@ namespace APIProject.UnitOfWork
             }
         }
 
-        public GenericRepository<Admin> AdminRepo
-        {
-            get
-            {
-                if (_adminRepo == null)
-                    _adminRepo = new GenericRepository<Admin>(context);
-                return _adminRepo;
-            }
-        }
-        public GenericRepository<Question> QuestionRepo
-        {
-            get
-            {
-                if (_questionRepo == null)
-                    _questionRepo = new GenericRepository<Question>(context);
-                return _questionRepo;
-            }
-        }
-        public GenericRepository<Exam> ExamRepo
-        {
-            get
-            {
-                if (_examRepo == null)
-                    _examRepo = new GenericRepository<Exam>(context);
-                return _examRepo;
-            }
-        }
-        public GenericRepository<Student_Exam> StudentExamRepo
-        {
-            get
-            {
-                if (_studentExamRepo == null)
-                    _studentExamRepo = new GenericRepository<Student_Exam>(context);
-                return _studentExamRepo;
-            }
-        }
-
         public void Save()
         {
-            context.SaveChanges();
+           _db.SaveChanges();
         }
-
-
     }
 }

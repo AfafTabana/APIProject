@@ -7,7 +7,6 @@ namespace APIProject.UnitofWork
     {
         public readonly SystemMangmentContext _db;
         private GenericRepository<Student> _studentrepo;
-        public UnitOfWork( SystemMangmentContext db)
         private GenericRepository<Question> _Questionrepo;
         private GenericRepository<Exam> _examrepo;
         public UnitOfWork( SystemMangmentContext db)
@@ -52,15 +51,6 @@ namespace APIProject.UnitofWork
                     _examrepo = new GenericRepository<Exam>(_db);
                 }
                 return _examrepo;
-            }
-        }
-
-        {
-            get
-            {
-                if (_studentExamRepo == null)
-                    _studentExamRepo = new GenericRepository<Student_Exam>(context);
-                return _studentExamRepo;
             }
         }
 

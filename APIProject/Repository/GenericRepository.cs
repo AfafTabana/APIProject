@@ -25,10 +25,13 @@ namespace APIProject.Repository
             context.Set<TEntity>().Add(entity);
         }
 
-        public void Edit(TEntity entity)
+        public void Edit(TEntity entity, int id)
         {
-            context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
+            var trackedEntity = context.Set<TEntity>().Find(id);
+            if (trackedEntity != null)
+            {
+                context.Entry(trackedEntity).CurrentValues.SetValues(entity);
+            }
         }
 
         public void Remove(int id)

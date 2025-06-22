@@ -5,7 +5,9 @@ using APIProject.Repository;
 using APIProject.UnitofWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Client;
 using System;
+using APIProject.Mapper;
 
 namespace APIProject
 {
@@ -36,10 +38,14 @@ namespace APIProject
             builder.Services.AddScoped<UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(Program));
 
+            builder.Services.AddScoped<UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(StudentMapper));
+            builder.Services.AddScoped<GenericRepository<Question>>();
+            builder.Services.AddScoped<GenericRepository<Exam>>();
 
             #endregion
-
-
+            builder.Services.AddAutoMapper(typeof(QuestionMapper));
+            builder.Services.AddScoped<UnitOfWork>();
 
 
             var app = builder.Build();

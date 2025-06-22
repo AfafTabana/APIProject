@@ -2,6 +2,7 @@
 {
     public class EditQuestionDTO
     {
+        public int Id { get; set; }
         public int Grade { get; set; }
 
         public string Header { get; set; }

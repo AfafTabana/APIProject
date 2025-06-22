@@ -1,4 +1,5 @@
-﻿using APIProject.Models;
+﻿using APIProject.DTOs.Questions;
+using APIProject.Models;
 
 namespace APIProject.DTOs.Exams
 {
@@ -15,6 +16,6 @@ namespace APIProject.DTOs.Exams
 
         public int Grade { get; set; }
 
-        public List<Question> Questions { get; set; }
+        public List<DisplayQuestionDTO> Questions { get; set; }
     }
 }

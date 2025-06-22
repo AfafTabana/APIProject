@@ -16,7 +16,7 @@ namespace APIProject.Repository
             return context.Set<TEntity>().ToList();
         }
 
-        public  TEntity GetById(int id)
+        public  TEntity ? GetById(int id)
         {
             return context.Set<TEntity>().Find(id);
         }

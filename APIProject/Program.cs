@@ -2,7 +2,7 @@
 using APIProject.Mapper;
 using APIProject.Models;
 using APIProject.Repository;
-using APIProject.UnitOfWork;
+using APIProject.UnitofWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -32,6 +32,10 @@ namespace APIProject
             #region Register services Here 
             //1=== register generic repository
             builder.Services.AddScoped<GenericRepository<Student>>();
+            builder.Services.AddScoped<GenericRepository<Exam>>();
+            builder.Services.AddScoped<UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(Program));
+
 
             #endregion
 

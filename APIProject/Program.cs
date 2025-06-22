@@ -34,6 +34,8 @@ namespace APIProject
             #region Register services Here 
             //1=== register generic repository
             builder.Services.AddScoped<GenericRepository<Student>>();
+            builder.Services.AddScoped<UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(StudentMapper));
             builder.Services.AddScoped<GenericRepository<Question>>();
             builder.Services.AddScoped<GenericRepository<Exam>>();
 

@@ -61,7 +61,7 @@ namespace APIProject.Controllers
             Exam? exam = unit.ExamRepo.GetById(id);
             if (exam == null) return NotFound("Exam not found");
             map.Map(dto, exam);
-            unit.ExamRepo.Edit(exam);
+            unit.ExamRepo.Edit(exam ,id);
             unit.Save();
             return Ok("Exam updated");
         }

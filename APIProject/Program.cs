@@ -2,10 +2,12 @@
 using APIProject.Mapper;
 using APIProject.Models;
 using APIProject.Repository;
-using APIProject.UnitOfWork;
+using APIProject.UnitofWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Identity.Client;
 using System;
+using APIProject.Mapper;
 
 namespace APIProject
 {
@@ -32,10 +34,12 @@ namespace APIProject
             #region Register services Here 
             //1=== register generic repository
             builder.Services.AddScoped<GenericRepository<Student>>();
+            builder.Services.AddScoped<GenericRepository<Question>>();
+            builder.Services.AddScoped<GenericRepository<Exam>>();
 
             #endregion
-
-
+            builder.Services.AddAutoMapper(typeof(QuestionMapper));
+            builder.Services.AddScoped<UnitOfWork>();
 
 
             var app = builder.Build();

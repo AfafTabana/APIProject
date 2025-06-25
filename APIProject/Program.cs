@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Identity.Client;
 using System;
 using System.Text;
+using APIProject.Mapper;
 
 namespace APIProject
 {
@@ -35,8 +37,15 @@ namespace APIProject
             #region Register services Here 
             //1=== register generic repository
             builder.Services.AddScoped<GenericRepository<Student>>();
+            builder.Services.AddScoped<GenericRepository<Exam>>();
             builder.Services.AddScoped<UnitOfWork>();
               builder.Services.AddAutoMapper(typeof(StudentMapper));
+            builder.Services.AddAutoMapper(typeof(Program));
+
+            builder.Services.AddScoped<UnitOfWork>();
+            builder.Services.AddAutoMapper(typeof(StudentMapper));
+            builder.Services.AddScoped<GenericRepository<Question>>();
+            builder.Services.AddScoped<GenericRepository<Exam>>();
 
             //=== register Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
@@ -72,8 +81,8 @@ namespace APIProject
 
 
             #endregion
-
-
+            builder.Services.AddAutoMapper(typeof(QuestionMapper));
+            builder.Services.AddScoped<UnitOfWork>();
 
 
             var app = builder.Build();

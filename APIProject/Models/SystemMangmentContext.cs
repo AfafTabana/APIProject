@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace APIProject.Models
 {
-    public class SystemMangmentContext :DbContext
+    public class SystemMangmentContext : IdentityDbContext<ApplicationUser>
     {
         public SystemMangmentContext()
         {

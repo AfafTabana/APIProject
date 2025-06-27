@@ -46,7 +46,7 @@ namespace APIProject.Controllers
 
             if (EditedQuestion == null) { return BadRequest(); }
 
-            if (Id != questionDTO.Id) { return BadRequest();  }
+            if (Id != questionDTO.Id) { return BadRequest("Are You Sure Of What You Want to Edit ?");  }
             if (questionDTO == null) { return BadRequest(); }
             else
             {
@@ -76,7 +76,7 @@ namespace APIProject.Controllers
             {
                 unitofWork.Questionrepo.Remove(id);
                 unitofWork.Save();
-                return Ok();
+                return Ok("Question is Deleted");
 
             }
                 

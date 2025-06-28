@@ -1,14 +1,16 @@
 ﻿using APIProject.DTOs.Acount;
 using APIProject.Models;
+using APIProject.UnitofWork;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Threading.Tasks;
-using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using APIProject.UnitofWork; 
 using System.Text;
+using System.Threading.Tasks;
 
 namespace APIProject.Controllers
 {
@@ -19,11 +21,13 @@ namespace APIProject.Controllers
         private readonly UserManager<ApplicationUser> usermManager;
         private readonly SignInManager<ApplicationUser> signInMAnager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UnitOfWork unitofWork;
 
         public AccountController(UserManager<ApplicationUser> _usermManager ,
             SignInManager<ApplicationUser> _signInManager,
-            RoleManager<IdentityRole> _roleManager)
+            RoleManager<IdentityRole> _roleManager , UnitOfWork unit)
         {
+            this.unitofWork = unit; 
             this.usermManager = _usermManager;
             this.signInMAnager = _signInManager;
             this.roleManager = _roleManager;
@@ -91,8 +95,10 @@ namespace APIProject.Controllers
 
             var result = await usermManager.CreateAsync(user, registerDTO.Password);
             if (!result.Succeeded)
-
+            {
                 return BadRequest(result.Errors);
+            }
+
             //give  role to new use 
             //1== if the role doesn't exist creat it 
             //this line wil be executed only in the first user
@@ -102,7 +108,20 @@ namespace APIProject.Controllers
             //adding user to role
             await usermManager.AddToRoleAsync(user, "User");
 
-            //else we will crat tooken 
+            var createdUser = await usermManager.FindByNameAsync(user.UserName);
+
+
+            //else we will crat tooken
+            var student = new Student
+            {
+                Email = createdUser.Email,
+                Username = createdUser.UserName,
+                ApplicationUserId = createdUser.Id
+            };
+
+            unitofWork.StudentRepo.Add(student);
+            await unitofWork.SaveAsync();
+
 
             return Ok();
         }

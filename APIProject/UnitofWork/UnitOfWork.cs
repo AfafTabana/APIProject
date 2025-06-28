@@ -1,5 +1,6 @@
 ﻿using APIProject.Models;
 using APIProject.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace APIProject.UnitofWork
 {
@@ -57,6 +58,11 @@ namespace APIProject.UnitofWork
         public void Save()
         {
            _db.SaveChanges();
+        }
+
+        public async Task SaveAsync()
+        {
+            await _db.SaveChangesAsync();
         }
     }
 }

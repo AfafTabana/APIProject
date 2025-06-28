@@ -39,7 +39,7 @@ namespace APIProject.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{Id}")]
         public ActionResult EditQuestion(int Id , EditQuestionDTO questionDTO)
         {
             Question EditedQuestion = unitofWork.Questionrepo.GetById(Id);
@@ -59,7 +59,7 @@ namespace APIProject.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
 
         public ActionResult DeleteQuestion(int id)
         {
@@ -76,13 +76,13 @@ namespace APIProject.Controllers
             {
                 unitofWork.Questionrepo.Remove(id);
                 unitofWork.Save();
-                return Ok("Question is Deleted");
+                return Ok();
 
             }
                 
         }
 
-        [HttpGet]
+        [HttpGet("{Exam_id}")]
         public ActionResult GetQuestion(int Exam_id) {
             Exam Exam = unitofWork.ExamRepo.GetById(Exam_id);
 

@@ -27,12 +27,26 @@ namespace APIProject
                 options.UseSqlServer(builder.Configuration.GetConnectionString("db"));
             });
 
+
             // Add services to the container.
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            #region Cors 
+            // Add CORS service
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp",
+                    policy => policy
+                        .WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                );
+            });
+
+            #endregion
 
             #region Register services Here 
             //1=== register generic repository
@@ -97,6 +111,8 @@ namespace APIProject
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAngularApp");
 
             app.UseAuthorization();
 

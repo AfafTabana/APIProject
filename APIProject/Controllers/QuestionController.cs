@@ -39,14 +39,14 @@ namespace APIProject.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{Id}")]
         public ActionResult EditQuestion(int Id , EditQuestionDTO questionDTO)
         {
             Question EditedQuestion = unitofWork.Questionrepo.GetById(Id);
 
             if (EditedQuestion == null) { return BadRequest(); }
 
-            if (Id != questionDTO.Id) { return BadRequest();  }
+            if (Id != questionDTO.Id) { return BadRequest("Are You Sure Of What You Want to Edit ?");  }
             if (questionDTO == null) { return BadRequest(); }
             else
             {
@@ -59,7 +59,7 @@ namespace APIProject.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
 
         public ActionResult DeleteQuestion(int id)
         {
@@ -82,7 +82,7 @@ namespace APIProject.Controllers
                 
         }
 
-        [HttpGet]
+        [HttpGet("{Exam_id}")]
         public ActionResult GetQuestion(int Exam_id) {
             Exam Exam = unitofWork.ExamRepo.GetById(Exam_id);
 

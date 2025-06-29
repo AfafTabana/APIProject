@@ -4,6 +4,7 @@ using APIProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIProject.Migrations
 {
     [DbContext(typeof(SystemMangmentContext))]
-    partial class SystemMangmentContextModelSnapshot : ModelSnapshot
+    [Migration("20250628071543_EditAccount")]
+    partial class EditAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -376,13 +379,13 @@ namespace APIProject.Migrations
 
             modelBuilder.Entity("APIProject.Models.Admin", b =>
                 {
-                    b.HasOne("APIProject.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("APIProject.Models.ApplicationUser", "Applicationuser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("Applicationuser");
                 });
 
             modelBuilder.Entity("APIProject.Models.Question", b =>
@@ -398,13 +401,13 @@ namespace APIProject.Migrations
 
             modelBuilder.Entity("APIProject.Models.Student", b =>
                 {
-                    b.HasOne("APIProject.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("APIProject.Models.ApplicationUser", "Applicationuser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("Applicationuser");
                 });
 
             modelBuilder.Entity("APIProject.Models.Student_Exam", b =>

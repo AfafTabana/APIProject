@@ -33,6 +33,16 @@ namespace APIProject
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            // Add CORS policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularClient", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
             #region Cors 
             // Add CORS service
@@ -109,7 +119,7 @@ namespace APIProject
                 app.UseSwaggerUI(op => op.SwaggerEndpoint("/openapi/v1.json", "v1"));
 
             }
-
+            app.UseCors("AllowAngularClient");
             app.UseHttpsRedirection();
 
             app.UseCors("AllowAngularApp");

@@ -51,7 +51,8 @@ namespace APIProject.Controllers
             Exam? exam = map.Map<Exam>(dto);
             unit.ExamRepo.Add(exam);
             unit.Save();
-            return Ok("Exam created");
+            return Ok(new { message = "Exam created" });
+
         }
         [Authorize(Roles = "Admin")]
         [HttpPut("{id:int}")]
@@ -65,7 +66,7 @@ namespace APIProject.Controllers
             map.Map(dto, exam);
             unit.ExamRepo.Edit(exam ,id);
             unit.Save();
-            return Ok("Exam updated");
+            return Ok(new { message = "Exam updated" });
         }
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
@@ -77,7 +78,7 @@ namespace APIProject.Controllers
             if (exam == null) return NotFound("Exam not found");
             unit.ExamRepo.Remove(id);
             unit.Save();
-            return Ok("Exam deleted");
+            return Ok(new { message = "Exam deleted" });
         }
     }
 }

@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using APIProject.DTOs.Students;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIProject.Controllers
 {
@@ -20,7 +21,7 @@ namespace APIProject.Controllers
             this.unit = unit;
             this.map = map;
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -35,7 +36,7 @@ namespace APIProject.Controllers
             List<DisplayStudentDTO> studentDtos = map.Map< List<DisplayStudentDTO>>(sts);
             return Ok(studentDtos);
         }
-
+       // [Authorize(Roles = "Admin")]
         [HttpGet("searchBy/{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -49,7 +50,7 @@ namespace APIProject.Controllers
             DisplayStudentDTO studentDto = map.Map<DisplayStudentDTO>(student);
             return Ok(studentDto);
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpGet("searchBy/{username:alpha}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -64,7 +65,7 @@ namespace APIProject.Controllers
             return Ok(studentDto);
         }
 
-
+        //[Authorize(Roles = "Admin")]
         [HttpGet("details/{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]

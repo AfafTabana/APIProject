@@ -5,6 +5,7 @@ using APIProject.UnitofWork;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIProject.Controllers
 {
@@ -22,7 +23,7 @@ namespace APIProject.Controllers
             unitofWork = unit;
             mapper = map;
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult CreateQuestion(AddQuestionDTO questionDTO)
         {
@@ -38,7 +39,7 @@ namespace APIProject.Controllers
                 return BadRequest();
             }
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{Id}")]
         public ActionResult EditQuestion(int Id , EditQuestionDTO questionDTO)
         {
@@ -58,7 +59,7 @@ namespace APIProject.Controllers
             }
 
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
 
         public ActionResult DeleteQuestion(int id)
@@ -81,7 +82,7 @@ namespace APIProject.Controllers
             }
                 
         }
-
+        //[Authorize(Roles = "Admin")]
         [HttpGet("{Exam_id}")]
         public ActionResult GetQuestion(int Exam_id) {
             Exam Exam = unitofWork.ExamRepo.GetById(Exam_id);

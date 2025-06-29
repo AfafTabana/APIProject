@@ -2,6 +2,7 @@
 using APIProject.Models;
 using APIProject.UnitofWork;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,7 @@ namespace APIProject.Controllers
             DisplayExamsDetailsDTO dto = map.Map<DisplayExamsDetailsDTO>(exam);
             return Ok(dto);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -51,7 +53,7 @@ namespace APIProject.Controllers
             unit.Save();
             return Ok("Exam created");
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(40)]
@@ -65,6 +67,7 @@ namespace APIProject.Controllers
             unit.Save();
             return Ok("Exam updated");
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]

@@ -33,16 +33,6 @@ namespace APIProject
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
-            // Add CORS policy
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAngularClient", policy =>
-                {
-                    policy.WithOrigins("http://localhost:4200")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
-                });
-            });
 
             #region Cors 
             // Add CORS service
@@ -65,11 +55,12 @@ namespace APIProject
             builder.Services.AddScoped<UnitOfWork>();
               builder.Services.AddAutoMapper(typeof(StudentMapper));
             builder.Services.AddAutoMapper(typeof(Program));
-
+            builder.Services.AddAutoMapper(typeof(StudentExamMapper));
             builder.Services.AddScoped<UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(StudentMapper));
             builder.Services.AddScoped<GenericRepository<Question>>();
             builder.Services.AddScoped<GenericRepository<Exam>>();
+            builder.Services.AddScoped<GenericRepository<Student_Exam>>();
 
             //=== register Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(

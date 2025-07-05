@@ -41,7 +41,7 @@ namespace APIProject.Controllers
             DisplayExamsDetailsDTO dto = map.Map<DisplayExamsDetailsDTO>(exam);
             return Ok(dto);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -54,7 +54,7 @@ namespace APIProject.Controllers
             return Ok(new { message = "Exam created" });
 
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(40)]
@@ -68,7 +68,7 @@ namespace APIProject.Controllers
             unit.Save();
             return Ok(new { message = "Exam updated" });
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]

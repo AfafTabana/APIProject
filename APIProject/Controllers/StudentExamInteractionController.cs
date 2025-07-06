@@ -111,6 +111,23 @@ namespace APIProject.Controllers
             return Ok(dto);
         }
 
+        [HttpGet("exam-result/{studentId}/{examId}")]
+        public IActionResult GetResultForExam(int studentId, int examId)
+        {
+            var result = unit._db.Student_Exams.FirstOrDefault(r => r.Student_id == studentId && r.Exam_id == examId);
+            if (result == null) return NotFound("No result found");
+
+            var dto = new StudentResultDTO
+            {
+                ExamName = unit._db.Exams.FirstOrDefault(e => e.Id == examId)?.Name ?? "unknown",
+                Grade = result.Stud_Grad
+            };
+
+            return Ok(dto);
+        }
+
+
+
         [HttpGet("admin/all-results")]
         //[Authorize(Roles = "Admin")]
         [ProducesResponseType(200)]
